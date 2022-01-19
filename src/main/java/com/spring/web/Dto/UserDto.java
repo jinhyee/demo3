@@ -31,7 +31,7 @@ public class UserDto {
     @NotBlank(message = "이메일은 필수 입력 값입니다.")
     private String email;
 
-    @Pattern(regexp="[0-9]{11}",
+    @Pattern(regexp="^[0-9]{9,11}$",
             message = "전화번호는 숫자로만 입력해야 합니다.")
     @NotBlank(message = "전화번호는 필수 입력 값입니다.")
     private String tel;

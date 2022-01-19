@@ -23,6 +23,9 @@
 
     <!-- contents css -->
     <link rel="stylesheet" th:href="@{/css/signup-contents.css}">
+
+    <!-- loginvalid js -->
+    <script type="text/javascript" th:src="@{/js/loginvalid.js}"></script>
 </head>
 <body>
 <header>
@@ -36,7 +39,7 @@
                 <h1><span class="title">로그인 페이지</span></h1>
             </div>
             <div class="form-group" id="content-size">
-                <form th:action="@{/login}" method="post">
+                <form th:action="@{/login}" name="login-form" method="post">
                     <table class="table_center">
                         <tr>
                             <td>아이디</td>
@@ -47,7 +50,7 @@
                             <td><input type="password" class="form-control" id="password1" name="password"></td>
                         </tr>
                         <tr>
-                            <td colspan="2"><button type="submit" id="loginbtn" class="btn">로그인</button></td>
+                            <td colspan="2"><button type="submit" id="loginbtn" class="btn" onclick="printForm()">로그인</button></td>
                         </tr>
                     </table>
                 </form>
@@ -58,25 +61,5 @@
         </div>
     </div>
 </div>
-<!--<script>-->
-<!--    $(document).ready(function(){-->
-<!--        $("#loginbtn").click(function() {-->
-<!--            if( $("#id").val() == "" ){-->
-<!--                alert("아이디를 입력해주세요.");-->
-<!--                $("#id").focus();-->
-<!--                return;-->
-<!--            }-->
-
-<!--            if( $("#password1").val() == "" ){-->
-<!--                alert("비밀번호를 입력해주세요.");-->
-<!--                $("#password1").focus();-->
-<!--                return;-->
-<!--            }-->
-
-<!--            $("#login-frm").submit();-->
-<!--        })//login-->
-
-<!--        });-->
-<!--</script>-->
 </body>
 </html>

@@ -39,14 +39,24 @@ public class UserController {
             }
             return "/signup";
         }
-
         userService.save(userDto);
 
         return "redirect:/login";
     }
 
     @RequestMapping("/login")
-    public String login(){
+    public String login(@Valid UserDto userDto, Errors errors, Model model){
+        if (errors.hasErrors()) {
+            //로그인 실패시, 입력 데이터를 유지하고싶다
+            model.addAttribute("userDto",userDto);
+
+            //유효성 통과 못한 필드와 메시지를 핸들링하고싶다 ,,,,
+            Map<String, String> validatorResult = userService.validateHandling(errors);
+            for (String key : validatorResult.keySet()) {
+                model.addAttribute(key, validatorResult.get(key));
+            }
+            return "/login";
+        }
         return "login";
     }
 
