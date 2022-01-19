@@ -35,15 +35,17 @@
                 <h1><span class="title">회원가입 페이지</span></h1>
             </div>
             <div class="form-group" id="content-size">
-                <form name="signup-form" th:action="@{/signup}" method="POST">
+                <form name="signup-form" th:action="@{/signup}" method="POST" modelAttribute="userDto">
                     <table class="table_center">
                         <tr>
                             <td>아이디</td>
                             <td><input type="text" class="form-control" name="id" id="id"></td>
+                            <td><span th:text="${valid_id}"></span></td>
                         </tr>
                         <tr>
                             <td>비밀번호</td>
                             <td><input type="password" class="form-control" name="pw" id="password1"></td>
+                            <td><span th:text="${valid_pw}"></span></td>
                         </tr>
                         <tr>
                             <td>비밀번호 확인&nbsp;&nbsp;&nbsp;</td>
@@ -52,14 +54,17 @@
                         <tr>
                             <td>이름</td>
                             <td><input type="text" class="form-control" name="name" id="name"></td>
+                            <td><span th:text="${valid_name}"></span></td>
                         </tr>
                         <tr>
                             <td>이메일</td>
                             <td><input type="email" class="form-control" name="email" id="email"></td>
+                            <td><span th:text="${valid_email}"></span></td>
                         </tr>
                         <tr>
                             <td>전화번호</td>
                             <td><input type="tel" class="form-control" name="tel" id="tel"></td>
+                            <td><span th:text="${valid_tel}"></span></td>
                         </tr>
                         <tr>
                             <td>우편번호</td>
@@ -84,8 +89,6 @@
                     </table>
             </form>
         </div>
-
-        <a href="/login">로그인 하기 -></a>
     </div>
 </div>
 </div>
