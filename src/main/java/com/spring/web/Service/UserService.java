@@ -27,6 +27,7 @@ public class UserService implements UserDetailsService {
 
     public String getauth(User user){
         return user.getAuth();
+
     }
 
     //회원가입 저장 메소드

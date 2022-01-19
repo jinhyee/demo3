@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <body>
 <nav class="navbar navbar-default" th:fragment="menu(menu)">
     <div class="container-fluid">
@@ -16,7 +17,7 @@
                     <a th:href="@{/index}">홈</a>
                 </li>
                 <li class="nav-item" th:classappend="${menu} == 'another'? 'active'">
-                    <a href="#">다른기능</a>
+                    <a href="https://www.geostory.co.kr/main/main.html?">회사홈페이지</a>
                 </li>
             </ul>
             <form class="navbar-form navbar-left" role="search">

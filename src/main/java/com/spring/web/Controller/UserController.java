@@ -1,11 +1,16 @@
 package com.spring.web.Controller;
 
+import com.spring.web.Domain.User;
 import com.spring.web.Dto.UserDto;
 import com.spring.web.Service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpSession;
 
 @RequiredArgsConstructor
 @Controller
@@ -23,7 +28,7 @@ public class UserController {
         return "redirect:/login";
     }
 
-    @GetMapping("/login")
+    @RequestMapping("/login")
     public String login(){
         return "login";
     }
@@ -32,4 +37,12 @@ public class UserController {
     public String index(){
         return "index";
     }
+    @GetMapping("/main")
+    public String main(){
+        System.out.println(SecurityContextHolder.getContext().getAuthentication().getName());
+        return "/user/index";
+    }
+
+
+
 }

@@ -1,20 +1,28 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <!-- bootstrap link -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
     <title>Hello, world!</title>
+
+    <!-- header font link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
+
+    <!-- header css -->
+    <link rel="stylesheet" th:href="@{/css/header.css}">
 </head>
-<style>
-    .img-size{width: 30px}
-</style>
 <body class="d-flex flex-column h-100">
     <header>
         <nav class="navbar navbar-default" th:replace="fragements/common :: menu('home')"></nav>
     </header>
     <main role="main">
         <div class="container">
+            <h6>메인페이지입니다?</h6>
         </div>
     </main>
 </body>

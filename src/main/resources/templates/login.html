@@ -2,17 +2,81 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- jQuery CDN-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+    <!-- bootstrap link -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <title>Title</title>
+    <title>로그인</title>
+
+    <!-- header font link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
+
+    <title>login page</title>
+
+    <!-- header css -->
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+
+    <!-- contents css -->
+    <link rel="stylesheet" th:href="@{/css/signup-contents.css}">
 </head>
-<style>
-    .img-size{width: 30px}
-</style>
 <body>
 <header>
     <nav class="navbar navbar-default" th:replace="fragements/common :: menu('login')"></nav>
 </header>
+
+<div class="wrapper">
+    <div class="container">
+        <div class="content1">
+            <div>
+                <h1><span class="title">로그인 페이지</span></h1>
+            </div>
+            <div class="form-group" id="content-size">
+                <form th:action="@{/login}" method="post">
+                    <table class="table_center">
+                        <tr>
+                            <td>아이디</td>
+                            <td><input type="text" class="form-control" id="username" name="username"></td>
+                        </tr>
+                        <tr>
+                            <td>비밀번호</td>
+                            <td><input type="password" class="form-control" id="password1" name="password"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><button type="submit" id="loginbtn" class="btn">로그인</button></td>
+                        </tr>
+                    </table>
+                </form>
+                <div>
+                    <a th:href="@{/signup}">회원가입</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<script>-->
+<!--    $(document).ready(function(){-->
+<!--        $("#loginbtn").click(function() {-->
+<!--            if( $("#id").val() == "" ){-->
+<!--                alert("아이디를 입력해주세요.");-->
+<!--                $("#id").focus();-->
+<!--                return;-->
+<!--            }-->
+
+<!--            if( $("#password1").val() == "" ){-->
+<!--                alert("비밀번호를 입력해주세요.");-->
+<!--                $("#password1").focus();-->
+<!--                return;-->
+<!--            }-->
+
+<!--            $("#login-frm").submit();-->
+<!--        })//login-->
+
+<!--        });-->
+<!--</script>-->
 </body>
 </html>
