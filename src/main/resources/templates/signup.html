@@ -17,13 +17,21 @@
     <link rel="stylesheet" th:href="@{/css/header.css}">
 
     <!-- contents css -->
-    <link rel="stylesheet" th:href="@{/css/signup-contents.css}">
+    <link rel="stylesheet" th:href="@{/css/contents.css}">
+
+    <!-- singup css -->
+    <link rel="stylesheet" th:href="@{/css/signup.css}">
 
     <!-- daum api -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
     <!-- daum api js -->
     <script type="text/javascript" th:src="@{/js/daumapi.js}"></script>
+
+    <!-- signup js -->
+    <script type="text/javascript" th:src="@{/js/signupvalid.js}"></script>
+
+
 </head>
 <meta charset="UTF-8">
 <title>signup page</title>
@@ -42,7 +50,7 @@
                     <table class="table_center">
                         <tr>
                             <td>아이디</td>
-                            <td><input type="text" class="form-control" name="id" id="id"></td>
+                            <td><input type="text" class="form-control" name="id" id="id" required oninput="checkId()"></td>
                             <td><span th:text="${valid_id}"></span></td>
                         </tr>
                         <tr>
@@ -95,18 +103,5 @@
     </div>
 </div>
 </div>
-
-<script>
-    function passwordConfirm(){
-        var pw1=document.getElementById('password1').value;
-        var pw2=document.getElementById('password2').value;
-
-        if(pw1!=pw2){
-            alert('비밀번호를 다시 확인하세요');
-            signup-form.password2.focus();
-            return;
-        }
-    }
-</script>
 </body>
 </html>

@@ -8,12 +8,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.Map;
 
 @RequiredArgsConstructor
@@ -39,24 +38,14 @@ public class UserController {
             }
             return "/signup";
         }
-        userService.save(userDto);
+        userService.checkId(userDto);
 
+        userService.save(userDto);
         return "redirect:/login";
     }
 
     @RequestMapping("/login")
-    public String login(@Valid UserDto userDto, Errors errors, Model model){
-        if (errors.hasErrors()) {
-            //로그인 실패시, 입력 데이터를 유지하고싶다
-            model.addAttribute("userDto",userDto);
-
-            //유효성 통과 못한 필드와 메시지를 핸들링하고싶다 ,,,,
-            Map<String, String> validatorResult = userService.validateHandling(errors);
-            for (String key : validatorResult.keySet()) {
-                model.addAttribute(key, validatorResult.get(key));
-            }
-            return "/login";
-        }
+    public String login(){
         return "login";
     }
 
@@ -67,10 +56,7 @@ public class UserController {
 
     @GetMapping("/main")
     public String main(){
-        System.out.println(SecurityContextHolder.getContext().getAuthentication().getName());
         return "/user/index";
     }
-
-
 
 }

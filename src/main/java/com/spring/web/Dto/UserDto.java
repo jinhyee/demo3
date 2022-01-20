@@ -1,9 +1,11 @@
 package com.spring.web.Dto;
 
+import com.spring.web.Domain.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.net.ssl.SSLSession;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -11,7 +13,6 @@ import java.time.LocalDateTime;
 
 @Getter @Setter
 @Builder
-
 public class UserDto {
 
     @NotBlank(message = "아이디는 필수 입력 값입니다.")
@@ -42,4 +43,36 @@ public class UserDto {
     private String extraaddress;
     private String auth;
     private LocalDateTime joindate;
+
+
+    ////////////////////////////////////////////
+    @Builder
+    public UserDto(String id, String pw, String name, String email, String tel, String postcode, String address, String detailaddress, String extraaddress, String auth, LocalDateTime joindate) {
+        this.id = id;
+        this.pw = pw;
+        this.name = name;
+        this.email = email;
+        this.tel = tel;
+        this.postcode = postcode;
+        this.address = address;
+        this.detailaddress = detailaddress;
+        this.extraaddress = extraaddress;
+        this.auth = auth;
+        this.joindate = joindate;
+    }
+
+    public User toEntity(){
+        return User.builder()
+                .id(id)
+                .pw(pw)
+                .name(name)
+                .email(email)
+                .tel(tel)
+                .postcode(postcode)
+                .address(address)
+                .detailaddress(detailaddress)
+                .extraaddress(extraaddress)
+                .build();
+    }
+
 }
