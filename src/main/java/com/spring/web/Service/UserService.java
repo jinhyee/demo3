@@ -16,6 +16,7 @@ import org.springframework.validation.FieldError;
 import java.lang.reflect.Member;
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -35,14 +36,6 @@ public class UserService implements UserDetailsService {
     public String getauth(User user){
         return user.getAuth();
 
-    }
-
-    //중복회원 인건데 엥 엥 이러면 중복확인 버튼이랑은 아무 소용이 없구나 이친구는
-    private void valicateDuplicateUser(User user){
-        Optional<User> findUser = userRepository.findById(user.getId());
-        if(findUser != null){
-            throw new IllegalStateException("이미 존재하는 회원입니다.");
-        }
     }
 
     //회원가입 저장 메소드
@@ -76,13 +69,11 @@ public class UserService implements UserDetailsService {
         return validatorResult;
     }
 
-    ///////////////////////////////////
+    //////////////////////////////////아이디 중복 체크
     @Transactional(readOnly = true)
-    public void checkId(UserDto dto){
-        boolean IdDuplicate = userRepository.existsById(dto.toEntity().getId());
-        if (IdDuplicate) {
-            throw new IllegalStateException("이미 존재하는 아이디입니다.");
-        }
+    public int idCheck(String id){
+        int cnt = userRepository.idCheck(id);
+        return cnt;
     }
 
 }

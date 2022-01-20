@@ -29,7 +29,32 @@
             <div class="title-size">
                 <h1><span class="title">회원 정보 페이지</span></h1>
             </div>
-
+            <div class="form-group" id="content-size">
+                <form name="userinfo-form" th:action="@{/infoupdate}" method="post">
+                    <table>
+                        <thead>
+                            <tr>
+                                <td>아이디</td>
+                                <td>이름</td>
+                                <td>이메일</td>
+                                <td>전화번호</td>
+                                <td>우편번호</td>
+                                <td>주소</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+<!--                            <tr th:each="user : ${users}">-->
+<!--                                <td th:text="${users.id}"></td>-->
+<!--                                <td th:text="${users.name}"></td>-->
+<!--                                <td th:text="${users.email}"></td>-->
+<!--                                <td th:text="${users.tel}"></td>-->
+<!--                                <td th:text="${users.postcode}"></td>-->
+<!--                                <td th:text="${users.address}"></td>-->
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
         </div>
         <span sec:authentication="name"/>
     </div>

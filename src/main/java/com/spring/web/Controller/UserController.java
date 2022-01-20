@@ -1,24 +1,31 @@
 package com.spring.web.Controller;
 
-import com.spring.web.Domain.User;
 import com.spring.web.Dto.UserDto;
 import com.spring.web.Service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.Map;
 
 @RequiredArgsConstructor
 @Controller
 public class UserController {
     private final UserService userService;
+
+    // 아이디 체크
+    @PostMapping("/idCheck")
+    @ResponseBody
+    public int idCheck(@RequestParam("id") String id){
+        System.out.println("userIdCheck 진입");
+        System.out.println("전달받은 id:"+id);
+        int cnt = userService.idCheck(id);
+        System.out.println("확인 결과:"+cnt);
+        return cnt;
+    }
 
     @GetMapping("/signup")
     public String signupForm(){
@@ -38,7 +45,6 @@ public class UserController {
             }
             return "/signup";
         }
-        userService.checkId(userDto);
 
         userService.save(userDto);
         return "redirect:/login";
