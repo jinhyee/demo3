@@ -92,4 +92,9 @@ public class UserController {
         return "/user/index";
     }
 
+    @GetMapping("/footer")
+    public String footer(){
+        return "fragements/footer";
+    }
+
 }

@@ -16,14 +16,21 @@
     <!-- header css -->
     <link rel="stylesheet" th:href="@{/css/header.css}">
 </head>
-<body class="d-flex flex-column h-100">
+<body>
     <header>
         <nav class="navbar navbar-default" th:replace="fragements/common :: menu('home')"></nav>
     </header>
-    <main role="main">
+    <div class="wrapper">
         <div class="container">
-            <h6>메인페이지입니다?</h6>
+            <div id="body-wrapper">
+                <div id="body-content">
+                    <h6>메인페이지입니다?</h6>
+                </div>
+            </div>
         </div>
-    </main>
+    </div>
+    <footer>
+        <div th:replace="fragements/footer"></div>
+    </footer>
 </body>
 </html>
