@@ -30,17 +30,17 @@ public class UserService implements UserDetailsService {
     @Override
     public User loadUserByUsername(String id) throws UsernameNotFoundException {
         return userRepository.findById(id)
-                .orElseThrow(()->new IllegalArgumentException(id+" : 로그인에 실패했습니다."));
+                .orElseThrow(() -> new IllegalArgumentException(id + " : 로그인에 실패했습니다."));
     }
 
-    public String getauth(User user){
+    public String getauth(User user) {
         return user.getAuth();
 
     }
 
     //회원가입 저장 메소드
-    public Long save(UserDto userDto){
-        BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
+    public Long save(UserDto userDto) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         userDto.setPw(encoder.encode(userDto.getPw()));
 
         return userRepository.save(User.builder()
@@ -69,11 +69,31 @@ public class UserService implements UserDetailsService {
         return validatorResult;
     }
 
-    //////////////////////////////////아이디 중복 체크
+    // 회원가입 시, 아이디 중복 검사
     @Transactional(readOnly = true)
-    public int idCheck(String id){
+    public int idCheck(String id) {
         int cnt = userRepository.idCheck(id);
         return cnt;
     }
 
+    public UserDto findCode(String id){
+        Optional<User> userEntityWrapper=userRepository.findById(id);
+        User userEntity=userEntityWrapper.get();
+
+        UserDto userDto = UserDto.builder()
+                .code(userEntity.getCode())
+                .id(userEntity.getId())
+                .pw(userEntity.getPw())
+                .name(userEntity.getName())
+                .email(userEntity.getEmail())
+                .tel(userEntity.getTel())
+                .postcode(userEntity.getPostcode())
+                .address(userEntity.getAddress())
+                .detailaddress(userEntity.getDetailaddress())
+                .extraaddress(userEntity.getExtraaddress())
+                .auth(userEntity.getAuth())
+                .joindate(LocalDateTime.now()).build();
+        return userDto;
+
+    }
 }

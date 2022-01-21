@@ -43,13 +43,13 @@
                             </tr>
                         </thead>
                         <tbody>
-<!--                            <tr th:each="user : ${users}">-->
-<!--                                <td th:text="${users.id}"></td>-->
-<!--                                <td th:text="${users.name}"></td>-->
-<!--                                <td th:text="${users.email}"></td>-->
-<!--                                <td th:text="${users.tel}"></td>-->
-<!--                                <td th:text="${users.postcode}"></td>-->
-<!--                                <td th:text="${users.address}"></td>-->
+                            <tr th:each="user : ${userList}">
+                                <td th:text="${user.code}"></td>
+                                <td th:text="${user.name}"></td>
+                                <td th:text="${user.email}"></td>
+                                <td th:text="${user.tel}"></td>
+                                <td th:text="${user.postcode}"></td>
+                                <td th:text="${user.address}"></td>
                             </tr>
                         </tbody>
                     </table>

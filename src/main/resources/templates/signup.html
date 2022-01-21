@@ -117,7 +117,7 @@
 <script>
     function checkId() {
         var id = document.getElementById('id').value;
-        alert(id);
+        //alert(id);
 
         $.ajax({
             url: "/idCheck",
@@ -125,12 +125,12 @@
             data: {id:id},
             success:function(cnt){
                 if(cnt>=1){
-                    alert(cnt);
+                    //alert(cnt);
                     $('.id_already').css("display","inline-block");
                     $('.id_ok').css("display", "none");
                 }
                 if(cnt==0){
-                    alert(cnt);
+                    //alert(cnt);
                     $('.id_already').css("display", "none");
                     $('.id_ok').css("display","inline-block");
                 }else{

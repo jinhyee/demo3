@@ -1,3 +1,4 @@
+// 비밀번호 확인
 function passwordConfirm(){
     var pw1=document.getElementById('password1').value;
     var pw2=document.getElementById('password2').value;

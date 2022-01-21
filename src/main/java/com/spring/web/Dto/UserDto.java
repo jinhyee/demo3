@@ -15,6 +15,8 @@ import java.time.LocalDateTime;
 @Builder
 public class UserDto {
 
+    private Long code;
+
     @NotBlank(message = "아이디는 필수 입력 값입니다.")
     private String id;
 
@@ -47,7 +49,8 @@ public class UserDto {
 
     ////////////////////////////////////////////
     @Builder
-    public UserDto(String id, String pw, String name, String email, String tel, String postcode, String address, String detailaddress, String extraaddress, String auth, LocalDateTime joindate) {
+    public UserDto(Long code, String id, String pw, String name, String email, String tel, String postcode, String address, String detailaddress, String extraaddress, String auth, LocalDateTime joindate) {
+        this.code = code;
         this.id = id;
         this.pw = pw;
         this.name = name;
@@ -63,6 +66,7 @@ public class UserDto {
 
     public User toEntity(){
         return User.builder()
+                .code(code)
                 .id(id)
                 .pw(pw)
                 .name(name)

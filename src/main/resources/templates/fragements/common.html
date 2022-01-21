@@ -20,19 +20,22 @@
                     <a href="https://www.geostory.co.kr/main/main.html?">회사홈페이지</a>
                 </li>
             </ul>
-            <form class="navbar-form navbar-left" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="검색">
-                </div>
-                <button type="submit" class="btn btn-default">검색</button>
-            </form><!-- 회원 검색 기능-->
             <ul class="nav navbar-nav navbar-right">
+
                 <li class="nav-item" th:classappend="${menu} == 'login'? 'active'">
                     <a th:href="@{/login}">로그인</a>
                 </li>
                 <li  class="nav-item" th:classappend="${menu} == 'signup'? 'active'">
                     <a th:href="@{/signup}">회원가입</a>
                 </li>
+
+                <li class="nav-item" th:classappend="${menu} == 'logout'? 'active'">
+                    <a th:href="@{/logout}">로그아웃</a>
+                </li>
+                <li  class="nav-item" th:classappend="${menu} == 'myinfo'? 'active'">
+                    <a th:href="@{/user/index}">내 정보</a>
+                </li>
+
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

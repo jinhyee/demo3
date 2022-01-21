@@ -58,7 +58,8 @@ public class User implements UserDetails {
     private LocalDateTime joindate;
 
     @Builder
-    public User(String id, String pw, String name, String email, String tel, String postcode, String address, String detailaddress, String extraaddress, String auth, LocalDateTime joindate) {
+    public User(Long code, String id, String pw, String name, String email, String tel, String postcode, String address, String detailaddress, String extraaddress, String auth, LocalDateTime joindate) {
+        this.code = code;
         this.id = id;
         this.pw = pw;
         this.name = name;

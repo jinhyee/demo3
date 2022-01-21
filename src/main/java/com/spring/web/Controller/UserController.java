@@ -1,14 +1,21 @@
 package com.spring.web.Controller;
 
+import com.spring.web.Domain.User;
 import com.spring.web.Dto.UserDto;
 import com.spring.web.Service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.security.Principal;
+import java.util.List;
 import java.util.Map;
 
 @RequiredArgsConstructor
@@ -51,8 +58,17 @@ public class UserController {
     }
 
     @RequestMapping("/login")
-    public String login(){
+    public String login(/*HttpServletRequest request*/){
+//        String id = request.setAttribute();
+
         return "login";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        new SecurityContextLogoutHandler().logout(request, response, SecurityContextHolder
+                .getContext().getAuthentication());
+        return  "redirect:/login";
     }
 
     @GetMapping("/index")
@@ -61,7 +77,10 @@ public class UserController {
     }
 
     @GetMapping("/main")
-    public String main(){
+    public String main(Model model){
+        UserDto userDto=userService.findCode(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("userList", userDto);
+
         return "/user/index";
     }
 
