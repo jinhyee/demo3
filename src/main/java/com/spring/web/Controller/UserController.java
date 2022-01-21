@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.List;
@@ -58,8 +59,15 @@ public class UserController {
     }
 
     @RequestMapping("/login")
-    public String login(/*HttpServletRequest request*/){
-//        String id = request.setAttribute();
+    public String login(/*HttpServletRequest request, Model model Principal principal*/) {
+
+//        HttpSession session = request.getSession();
+//        UserDto userDto=userService.findCode(SecurityContextHolder.getContext().getAuthentication().getName());
+//        model.addAttribute("userList", userDto);
+//        String loginId = principal.getName();
+//        session.setAttribute("sessionId",userDto);
+//        String sessionId = (String)session.getAttribute("sessionId");
+//        System.out.println("유저아이디" + sessionId);
 
         return "login";
     }

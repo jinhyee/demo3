@@ -22,11 +22,11 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
 
-                <li class="nav-item" th:classappend="${menu} == 'login'? 'active'">
-                    <a th:href="@{/login}">로그인</a>
+                <li class="nav-item" th:classappend="${menu} == 'logout'? 'active'">
+                    <a th:href="@{/logout}">로그아웃</a>
                 </li>
-                <li  class="nav-item" th:classappend="${menu} == 'signup'? 'active'">
-                    <a th:href="@{/signup}">회원가입</a>
+                <li  class="nav-item" th:classappend="${menu} == 'myinfo'? 'active'">
+                    <a th:href="@{/user/index}">내 정보</a>
                 </li>
 
             </ul>
