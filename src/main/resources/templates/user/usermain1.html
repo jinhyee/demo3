@@ -20,20 +20,33 @@
     <link rel="stylesheet" th:href="@{/css/contents.css}">
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-default" th:replace="fragements/common :: menu('home')"></nav>
-    </header>
-    <div class="wrapper">
-        <div class="container">
-            <div id="body-wrapper">
-                <div id="body-content">
-                    <h6>메인페이지입니다?</h6>
+<header>
+    <nav class="navbar navbar-default" th:replace="fragements/usercommon :: menu('naver')"></nav>
+</header>
+<div class="wrapper">
+    <div class="container">
+        <div id="body-wrapper">
+            <div id="body-content">
+                <h1>NAVER MAP</h1>
+
+                <div>
+                    <!-- naver map api -->
+                    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=exr61y0yag"></script>
+                    <div id="map2" style="width:100%;height:400px;"></div>
+                    <script>
+                        var mapOptions = {
+                            center: new naver.maps.LatLng(37.3595704, 127.105399),
+                            zoom: 10
+                        };
+                        var map = new naver.maps.Map('map2', mapOptions);
+                    </script>
                 </div>
             </div>
         </div>
     </div>
-    <footer>
-        <div th:replace="fragements/footer"></div>
-    </footer>
+</div>
+<footer>
+    <div th:replace="fragements/footer"></div>
+</footer>
 </body>
 </html>

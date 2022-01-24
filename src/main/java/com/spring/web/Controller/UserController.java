@@ -88,13 +88,29 @@ public class UserController {
     public String main(Model model){
         UserDto userDto=userService.findCode(SecurityContextHolder.getContext().getAuthentication().getName());
         model.addAttribute("userList", userDto);
-
         return "/user/index";
     }
 
-    @GetMapping("/footer")
-    public String footer(){
-        return "fragements/footer";
+    @GetMapping("/user/index")
+    public String userIndex(Model model){
+        UserDto userDto=userService.findCode(SecurityContextHolder.getContext().getAuthentication().getName());
+        model.addAttribute("userList", userDto);
+        return "/user/index";
+    }
+
+    @GetMapping("/user/usermain1")
+    public String naverMap(){
+        return "/user/usermain1";
+    }
+
+    @GetMapping("/user/usermain2")
+    public String kakaoMap(){
+        return "/user/usermain2";
+    }
+
+    @GetMapping("/user/usermain3")
+    public String googleMap(){
+        return "/user/usermain3";
     }
 
 }

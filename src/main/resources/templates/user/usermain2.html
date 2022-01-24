@@ -1,0 +1,53 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- bootstrap link -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+    <title>Hello, world!</title>
+
+    <!-- header font link -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
+
+    <!-- header css -->
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+
+    <!-- contents css -->
+    <link rel="stylesheet" th:href="@{/css/contents.css}">
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-default" th:replace="fragements/usercommon :: menu('kakao')"></nav>
+</header>
+<div class="wrapper">
+    <div class="container">
+        <div id="body-wrapper">
+            <div id="body-content">
+                <h1>KAKAO MAP</h1>
+                <div>
+                    <!-- daum map api -->
+                    <div id="map1" style="width:900px;height:600px;"></div>
+                    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=afd2a9cb5cac0ec7d5650d77e07cc5e2"></script>
+                    <script>
+                        var container = document.getElementById('map1');
+                        var options = {
+                            center: new kakao.maps.LatLng(33.450701, 126.570667),
+                            level: 3
+                        };
+
+                        var map = new kakao.maps.Map(container, options);
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <div th:replace="fragements/footer"></div>
+</footer>
+</body>
+</html>

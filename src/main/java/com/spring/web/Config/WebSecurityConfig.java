@@ -34,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable().headers().frameOptions().disable()// h2-console 화면 사용하기 위함
                 .and()
                 .authorizeRequests()
-                .antMatchers("/login", "/signup","/index","/","/idCheck","/footer").permitAll() // 누구나 접근 가능
+                .antMatchers("/login", "/signup","/index","/","/idCheck").permitAll() // 누구나 접근 가능
                 .antMatchers("/user/**").hasRole("USER") // USER, ADMIN 만 접근 가능
                 .antMatchers("/admin/**").hasRole("ADMIN") // ADMIN 만 접근 가능
                 .anyRequest().authenticated() // 나머지는 권한이 있기만 하면 접근 가능
