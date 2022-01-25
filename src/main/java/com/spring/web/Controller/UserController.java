@@ -113,4 +113,19 @@ public class UserController {
         return "/user/usermain3";
     }
 
+    @GetMapping("/user/usermain4")
+    public String vworldMap(){
+        return "/user/usermain4";
+    }
+
+    @GetMapping("/user/usermain5")
+    public String openstreetMap(){
+        return "/user/usermain5";
+    }
+
+    @GetMapping("/user/usermain6")
+    public String openstreetMap2(){
+        return "/user/usermain6";
+    }
+
 }
