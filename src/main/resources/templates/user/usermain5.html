@@ -57,6 +57,7 @@
                     <option value="seoul">서울</option>
 
                 </select>
+                <input type="button" value="선택값 초기화" id="resetbtn" name="resetbtn" class="btn" onclick="resetFunction()">
                 <!--Create our map object -->
                 <div id="map" class="map"></div>
 
@@ -100,26 +101,28 @@
                         }
                     }
 
+                    /* GEOServer에 올라가있는 wfs 파일 관련 */
+                    var leafletMap = new L.GeoJSON();
+                    var geoJsonUrl ='http://localhost:9999/geoserver/cite/ows';
+
                     function seoulguFunction(str) {
 
+                        var defaultParameters = {
+                            service: 'WFS',
+                            version: '1.0.0',
+                            request: 'getFeature',
+                            typeName: 'cite:seoulbuildings',
+                            outputFormat: 'application/json'
+                        };
+
+                        function loadGeoJson(data) {
+                            console.log(data);
+                            leafletMap.addData(data);
+                            map.addLayer(leafletMap);
+                        };
+
+
                         if (str == "seoul") {
-                            var geojsonLayerWells = new L.GeoJSON();
-
-                            function loadGeoJson(data) {
-                                console.log(data);
-                                geojsonLayerWells.addData(data);
-                                map.addLayer(geojsonLayerWells);
-                            };
-
-                            var geoJsonUrl ='http://localhost:9999/geoserver/cite/ows';
-                            var defaultParameters = {
-                                service: 'WFS',
-                                version: '1.0.0',
-                                request: 'getFeature',
-                                typeName: 'cite:seoulbuildings',
-                                outputFormat: 'application/json'
-                            };
-
                             var customParams = {
                                 bbox: map.getBounds().toBBoxString(),
                             };
@@ -136,8 +139,13 @@
                         } else {
                             alert("이건 왜");
                             //else는 타는데 removeLayer가 작동을 하지 않음
-                            map.removeLayer(geojsonLayerWells);
+                            map.removeLayer(leafletMap);
                         }//end else
+                    }
+
+                    function resetFunction(){
+                        alert("이거 타지나");
+                        map.removeLayer(leafletMap);
                     }
 
                 </script>
