@@ -22,17 +22,11 @@
     <!-- jQuery -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
-    <!--Load the style stylesheet of leaflet -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin=""/>
-    <!--Load leaflet -->
-    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
+    <!-- Include the CesiumJS JavaScript and CSS files -->
+    <script src="https://cesium.com/downloads/cesiumjs/releases/1.79.1/Build/Cesium/Cesium.js"></script>
+    <link href="https://cesium.com/downloads/cesiumjs/releases/1.79.1/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+</head>
 
-    <style>
-        .map {
-            height: 700px;
-            width: 100%;
-        }
-    </style>
 </head>
 <body>
 <header>
@@ -42,27 +36,38 @@
     <div class="container">
         <div id="body-wrapper">
             <div id="body-content">
-                <h1>OSM MAP</h1>
-                <!--Create our map object -->
-                <div id="map" class="map"></div>
-
+                <h1>Cesium MAP</h1>
+                <div id="cesiumContainer"></div>
                 <script>
-                    // Find our map id
-                    // initialize the map on the "map" div with a given center and zoom
-                    var map = L.map('map', {
-                        center: [37.568,126.993035],
-                        zoom: 10
-                    });
-                    // openstreetmap으로 지도의 베이스를 설정합니다.
-                    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+                    Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJmNWEzMWUwNS1mNDEzLTQ3ZjctOWMzNS1kYTQzOWZjNDBiMGYiLCJpZCI6NDcxNDksImlhdCI6MTYxNjk4MjIyM30.jFC5i3Jrmd710B_soZTocY5JEQPnrhVGNB3vXtXCtU4';
+                    const viewer = new Cesium.Viewer('cesiumContainer', {
+                        terrainProvider: Cesium.createWorldTerrain()
 
-                    // geoserver에서 가져오는 wmsLayer를 설정합니다.
-                    var wmsLayer = L.tileLayer.wms('http://localhost:9999/geoserver/cite/wms', {
-                        layers: 'cite:testpoint',
-                        transparent: true,
-                        format: 'image/png',
-                        crs: L.CRS.EPSG4326
-                    }).addTo(map);
+                    });
+
+                    // Add Cesium OSM Buildings, a global 3D buildings layer.
+                    //const buildingTileset = viewer.scene.primitives.add(Cesium.createOsmBuildings());
+
+                    //wms
+                    // var wms = new Cesium.WebMapServiceImageryProvider({
+                    //     //geoserver에 올려둔 데이터 가져오기
+                    //     url : '',
+                    //     parameter:{
+                    //         format : 'image/png',
+                    //         transparent: 'true'
+                    //     },
+                    //     layers : '',
+                    //     maximumLevel :12
+                    // });
+
+                    // Fly the camera to San Francisco at the given longitude, latitude, and height.
+                    viewer.camera.flyTo({
+                        destination : Cesium.Cartesian3.fromDegrees(126.85829, 37.55784, 300),
+                        orientation : {
+                            heading : Cesium.Math.toRadians(0.0),
+                            pitch : Cesium.Math.toRadians(-15.0),
+                        }
+                    });
                 </script>
             </div>
         </div>

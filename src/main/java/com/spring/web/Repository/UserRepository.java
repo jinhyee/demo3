@@ -18,4 +18,7 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     //회원정보 목록
     Optional<User> findByCode(Long code);
+
+    //주소 검색 시, 건물 표출
+    //public
 }

@@ -118,6 +118,7 @@ public class UserController {
         return "/user/usermain4";
     }
 
+    @CrossOrigin
     @GetMapping("/user/usermain5")
     public String openstreetMap(){
         return "/user/usermain5";

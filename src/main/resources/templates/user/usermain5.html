@@ -43,6 +43,20 @@
         <div id="body-wrapper">
             <div id="body-content">
                 <h1>OSM MAP</h1>
+                <select onchange="areaFunction(this.value)">
+                    <option>---- 이동할 위치를 선택하세요 ----</option>
+                    <option value="seoul">서울</option>
+                    <option value="incheon">인천</option>
+                    <option value="daejeon">대전</option>
+                    <option value="daegu">대구</option>
+                    <option value="ulsan">울산</option>
+                    <option value="busan">부산</option>
+                </select>
+                <select onchange="seoulguFunction(this.value)">
+                    <option>---- 건물 ----</option>
+                    <option value="seoul">서울</option>
+
+                </select>
                 <!--Create our map object -->
                 <div id="map" class="map"></div>
 
@@ -50,19 +64,13 @@
                     // Find our map id
                     // initialize the map on the "map" div with a given center and zoom
                     var map = L.map('map', {
-                        center: [37.568,126.993035],
-                        zoom: 10
+                        center: [37.55784,126.85962],
+                        zoom: 18
                     });
                     // openstreetmap으로 지도의 베이스를 설정합니다.
                     L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
 
                     // geoserver에서 가져오는 wmsLayer를 설정합니다.
-                    var wmsLayer1 = L.tileLayer.wms('http://localhost:9999/geoserver/cite/wms', {
-                        layers: 'cite:testbuildings',
-                        transparent: true,
-                        format: 'image/png',
-                        crs: L.CRS.EPSG4326
-                    }).addTo(map);
 
                     var wmsLayer2 = L.tileLayer.wms('http://localhost:9999/geoserver/cite/wms', {
                         layers: 'cite:testpoint',
@@ -70,6 +78,68 @@
                         format: 'image/png',
                         crs: L.CRS.EPSG4326
                     }).addTo(map);
+
+                    function areaFunction(str){
+                        if(str == "seoul"){
+                            map.setView([37.55645,126.98777],13);
+                        }
+                        if(str == "incheon"){
+                            map.setView([37.50914,126.64069],13);
+                        }
+                        if(str == "daejeon"){
+                            map.setView([36.34018,127.39431],13);
+                        }
+                        if(str == "daegu"){
+                            map.setView([35.82077,128.57080],13);
+                        }
+                        if(str == "ulsan"){
+                            map.setView([35.53692,129.25475],13);
+                        }
+                        if(str == "busan"){
+                            map.setView([35.20358,129.10462],13);
+                        }
+                    }
+
+                    function seoulguFunction(str) {
+
+                        if (str == "seoul") {
+                            var geojsonLayerWells = new L.GeoJSON();
+
+                            function loadGeoJson(data) {
+                                console.log(data);
+                                geojsonLayerWells.addData(data);
+                                map.addLayer(geojsonLayerWells);
+                            };
+
+                            var geoJsonUrl ='http://localhost:9999/geoserver/cite/ows';
+                            var defaultParameters = {
+                                service: 'WFS',
+                                version: '1.0.0',
+                                request: 'getFeature',
+                                typeName: 'cite:seoulbuildings',
+                                outputFormat: 'application/json'
+                            };
+
+                            var customParams = {
+                                bbox: map.getBounds().toBBoxString(),
+                            };
+
+                            var parameters = L.Util.extend(defaultParameters, customParams);
+                            console.log(geoJsonUrl + L.Util.getParamString(parameters));
+
+                            $.ajax({
+                                url: geoJsonUrl + L.Util.getParamString(parameters),
+                                datatype: 'jsonp',
+                                jsonCallback: 'getJson',
+                                success: loadGeoJson
+                            });
+                        } else {
+                            alert("이건 왜");
+                            //else는 타는데 removeLayer가 작동을 하지 않음
+                            map.removeLayer(geojsonLayerWells);
+                        }//end else
+                    }
+
                 </script>
             </div>
         </div>
